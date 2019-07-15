@@ -3,4 +3,42 @@
 #为什么要连接两个不同的git场景：
 #   公司开发过程中，是用公司的git
 #   自己学习过程中，使用自己的git   但是生成私钥时，默认只有一个id_rsa文件,在切换两个远程git的时候，会报公钥冲突错误。
+#个人配置时已经安装了：idea的git插件、git bsah插件、两个不同git账户下的两个远程仓库、已经配置好了一个远程仓库。
+
+1:在连接上第一个github账户之后，在git bash上生成第二个秘钥/公钥
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa_x -C "XXX@aliyun.com"
+    ##此处文件名id_rsa_x中的x可以任意命名，邮箱地址可以填写自己的
+2:操作完成后，cd ~/.ssh 该目录会多出 id_rsa_x 和 id_rsa_x.pub 两个文件
+3:创建或编辑config文件，配置不同的仓库指向不同的密钥文件
+    # 第一个账号，默认使用的账号
+    Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
+    # 第二个账号
+    Host second.github.com  # second为前缀名，可以任意设置
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_x
+4:添加秘钥到ssh-agent中
+    ssh-add id_rsa
+    ssh-add id_rsa_x
+    有的同学会遇到Could not open a connection to your authentication agent.这个提示
+    此时应先执行 eval 'ssh-agent' 再执行后面的命令
+5:加入秘钥之后，确认一下新密钥已经添加成功
+    ssh-add -l
+    会出现两条这样的秘钥信息
+    2048 SHA256:zlRwxfQaJysMeWM5Rf2vqfUzDIbbKf295j0CF9TMxqU long_tao@aliyun.com (RSA)
+    2048 SHA256:qxykB/9a6cMuhUW+fRkCqm7ncWUEvd9gSMH8Eve62+c Sunflower@DESKTOP-62IDCHH (RSA)
+6:可以试一下是都能够连接上
+    ssh -T git@github.com
+    ssh -T git@long_tao.github.com
+    如果都能够出现:Hi XXXX! You've successfully authenticated, but GitHub does not provide shell access.
+    则表示成功
+7:将第二个公钥 id_rsa_x.pub的内容添加到第二个git账户上的ssh公钥上去。
+
+8:在idea上Terminal窗口添加远程仓库：
+    git remote -add long_tao git@longtao.github.com:dragonAndWater/SomeProblem.git
+9:可以试一下pull或者push命令
+
 
