@@ -1,0 +1,34 @@
+
+
+##关于idea的破解方法
+
+背景：之前在淘宝上买了IDEA全家桶，19年11月中旬买的，但是到了20年1月上旬就不能用了。
+      花了15大洋，感觉像屎一样。于是在百度上查了下怎么破解。现将破解流程记录下来，方便以后使用。
+
+步骤1：在官网上下载IDEA-(我下载的是2019版本),跟着百度上的安装教程一路点击确认。
+
+步骤2：启动idea,可以先点30天试用进入idea
+
+步骤3：下载jetbrains-agent.jar，将这个包放到idea安装路劲的bin文件夹下
+
+步骤4：点开Idea菜单 "Help" -> "Edit Custom VM Options ..."，在这个文件最下面加一句话：
+       -javaagent:E:\1.IDEA\idea\IntelliJ IDEA 2019.2.4\bin\jetbrains-agent.jar
+       注意：[E:\1.IDEA\idea\IntelliJ IDEA 2019.2.4\bin\jetbrains-agent.jar]这串表示jar所在的绝对路劲，配置成自己的
+
+步骤5：点开Idea菜单 "Help" -> "Register..."，选择License server
+       把http://jetbrains-license-server填进去，点击active就行了。
+
+
+
+注意：百度上很多教程说的是：打开IDEA/bin/idea64.exe.vmoptions文件修改，这样是不行的。
+      必须在IDEA里面通过菜单修改。
+
+      我没有用注册码，因为百度到的注册码都是不对的，会提示invailed
+      如果哪个同学知道更好的破解方法欢迎分享我！先感谢大佬们的分享了！
+
+
+
+
+
+
+

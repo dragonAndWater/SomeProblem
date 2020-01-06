@@ -1,6 +1,10 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World! My name is longtao !");
+
+        String str = "900000117920|1|1000000|CNY|0|0|CNY|SHA256withRSA|456d0576f15d8ca1b756bf776250df804a2bd748f1f04d5e19607517c9911330f8aa5da020a92cbcb2eb96160b425941290cb99258b1ee0002480e7a6dc9e807a2866fc2d36fc66c966f602cd584e27f99880652c741b3b1f91468069384519e65c3d8e85ee62f85cead48dfc7043d9949e3f386cf9770b76719275e2fed60f1\n" +
+                "BZFDXDRTF|||000101012020010211224200044825|000101012020010211224200044825||1000000|CNY|0|||6217002830000854622|雷浩晨|42010119970304612X|I|||||||01|001|交易失败|102||20200102|112151|MO2020010200000000000000131858|0|CNY";
+        int i = str.indexOf('\n');
+        System.out.println(i);
     }
 }
