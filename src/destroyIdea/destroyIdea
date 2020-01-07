@@ -14,6 +14,7 @@
 步骤4：点开Idea菜单 "Help" -> "Edit Custom VM Options ..."，在这个文件最下面加一句话：
        -javaagent:E:\1.IDEA\idea\IntelliJ IDEA 2019.2.4\bin\jetbrains-agent.jar
        注意：[E:\1.IDEA\idea\IntelliJ IDEA 2019.2.4\bin\jetbrains-agent.jar]这串表示jar所在的绝对路劲，配置成自己的
+       *****配置好了之后，重启IDEA******
 
 步骤5：点开Idea菜单 "Help" -> "Register..."，选择License server
        把http://jetbrains-license-server填进去，点击active就行了。
