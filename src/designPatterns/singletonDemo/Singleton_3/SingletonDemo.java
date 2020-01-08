@@ -1,4 +1,4 @@
-package designPatterns.Singleton_2;
+package designPatterns.singletonDemo.Singleton_3;
 
 public class SingletonDemo {
     public static void main(String[] args) {

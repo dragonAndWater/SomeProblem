@@ -1,8 +1,8 @@
-package designPatterns.Singleton_5;
+package designPatterns.singletonDemo.Singleton_6;
 
 public class SingletonDemo {
     public static void main(String[] args) {
-        Singleton singleton = Singleton.getInstance();
+        Singleton singleton = Singleton.INSTANCE;
         singleton.getMessage();
     }
 }

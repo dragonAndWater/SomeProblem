@@ -1,4 +1,4 @@
-package designPatterns.Singleton_3;
+package designPatterns.singletonDemo.Singleton_3;
 
 /**
  * 单例模式有6种写法

@@ -1,4 +1,4 @@
-package designPatterns.Singleton_6;
+package designPatterns.singletonDemo.Singleton_6;
 
 /**
  * 这种实现方式还没有被广泛采用，但这是实现单例模式的最佳方法。

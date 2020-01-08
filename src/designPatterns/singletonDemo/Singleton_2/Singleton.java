@@ -1,4 +1,4 @@
-package designPatterns.Singleton_2;
+package designPatterns.singletonDemo.Singleton_2;
 
 /**
  * 单例模式的第二种方式
