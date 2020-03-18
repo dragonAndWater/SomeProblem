@@ -1,0 +1,81 @@
+--简单例子02  变量声明，赋值
+create or replace procedure myDemo02
+as
+name varchar2(10);
+    age number(3);
+BEGIN
+    name:='long_tao';
+    age:=20;
+    dbms_output.put_line('name='||name||',age='||age);
+end;
+--调用
+call myDemo02();
+
+
+--简单例子03 带有参数的存储过程
+create or replace procedure myDemo03(name in varchar,age in number)
+as
+begin
+    DBMS_OUTPUT.PUT_LINE('name = '||name||',age = '||age);
+end;
+--调用
+declare
+    begin
+    myDemo03('longyi',20);
+end;
+
+
+--简单例子04  形参实参
+create or replace procedure myDemo04(name in varchar,age in int )
+as
+    begin
+        DBMS_OUTPUT.PUT_LINE('name = '||name||',age = '||age);
+    end;
+--调用
+DECLARE
+    name VARCHAR(10);
+    age int;
+BEGIN
+    name:='longname';
+    age:= 12;
+    myDemo04(name, age);                --myDemo04(name => name, age => age);     myDemo04(name => 'longname', age => 12);
+    dbms_output.put_line('name = '||name);
+end;
+
+
+--简单例子05  in out参数
+create or replace procedure myDemo05(name out varchar,age in int )
+as
+begin
+    DBMS_OUTPUT.PUT_LINE('name = '||name||',age = '||age);
+    select 'longer' into name from DUAL;
+end;
+
+declare
+    name varchar(10);
+    age int;
+    begin
+    age := 99;
+    myDemo05(name => name,age => age);     --此处name => name,前面是形参，后面是实参。也可以写成myDemo05(name => name;age => 99),不能写成myDemo05(name => name; 99)
+    DBMS_OUTPUT.PUT_LINE('name = '||name);
+end;
+
+--简单例子06   存储过程捕获异常
+create or replace procedure myDemo06
+as
+    age int;
+        begin
+            age := 10/0;
+            DBMS_OUTPUT.PUT_LINE('age = '|| age);
+            exception when others then
+            DBMS_OUTPUT.PUT_LINE('error');
+        end;
+
+call myDemo06();
+begin
+    myDemo06();
+end;
+
+
+
+
