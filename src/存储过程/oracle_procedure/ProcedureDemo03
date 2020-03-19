@@ -1,0 +1,60 @@
+--更新某条数据库    修改
+create or replace procedure myDemo11(b_name in varchar)
+as
+begin
+    delete from BOOK where BOOKNAME = b_name;
+    commit;
+end;
+
+begin
+    myDemo11('C++');
+end ;
+
+--增加一条数据
+create or replace procedure myDemo12(b_name in varchar, b_price1 in number, b_price2 in number)
+as
+    b_price number;
+begin
+    if b_price1 > b_price2 then
+        b_price := b_price1;
+    else
+        b_price := b_price2;
+    end if;
+
+    insert into BOOK(bookname, bookprice) values (b_name, b_price);
+    commit;
+end;
+
+--调用
+begin
+    myDemo12('C++', '27.50', '30.50');
+end;
+
+
+
+--for循环
+create or replace procedure myDemo13
+as
+begin
+    for b in (select * from BOOK)
+        loop
+            if b.BOOKPRICE > 27.50 then
+                DBMS_OUTPUT.PUT_LINE('bookName = ' || b.BOOKNAME || 'bookPrice = ' || b.BOOKPRICE);
+            end if;
+        end loop;
+end;
+
+--调用
+begin
+    myDemo13();
+end;
+
+
+
+
+
+
+
+
+
+
