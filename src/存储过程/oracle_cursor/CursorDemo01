@@ -1,0 +1,78 @@
+--游标的判断    %found
+begin
+    update BOOK set bookprice = 25.50 where BOOKNAME = 'java';
+    If SQL%Found Then
+
+        DBMS_OUTPUT.PUT_LINE('已经更新！');
+        commit;
+    Else
+
+        DBMS_OUTPUT.PUT_LINE('更新失败！');
+        rollback;
+    End If;
+
+End;
+
+--for循环使用游标遍历book表中的内容
+declare
+    cursor bookCursor is select *
+                         from BOOK;
+begin
+    for bookEach in bookCursor
+        loop
+            DBMS_OUTPUT.PUT_LINE('bookName = ' || bookEach.BOOKNAME || ', bookPrice = ' || bookEach.BOOKPRICE);
+        end loop;
+    exception when others then
+    if bookCursor%isopen then
+        DBMS_OUTPUT.PUT_LINE('open');
+    else
+        DBMS_OUTPUT.PUT_LINE('close');
+    end if;
+end;
+
+--关于使用游标时异常的情况，
+--如果是隐式打开的游标，不需要手动关闭；会自动关闭
+--如果是显式打开的游标，必须手动关闭。
+
+--------隐式打开-----------
+declare
+    cursor bookCursor is select * from book;
+begin
+    for bookEach in bookCursor
+        loop
+            raise_application_error(-20001,'end loop');
+        end loop;
+    exception when others then
+    if bookCursor%isopen then
+        DBMS_OUTPUT.PUT_LINE('new is open');
+        close bookCursor;
+        DBMS_OUTPUT.PUT_LINE('closed');
+        else
+        DBMS_OUTPUT.PUT_LINE('closed');
+    end if;
+end;
+--------显式打开-----------
+declare
+    cursor bookCursor is select * from book;
+begin
+    open bookCursor;
+    for bookEach in bookCursor
+        loop
+            raise_application_error(-20001,'end loop');
+        end loop;
+    close bookCursor;
+    exception when others then
+    if bookCursor%isopen then
+        DBMS_OUTPUT.PUT_LINE('new is open');
+        close bookCursor;
+        DBMS_OUTPUT.PUT_LINE('closed');
+    else
+        DBMS_OUTPUT.PUT_LINE('closed');
+    end if;
+end;
+
+
+
+select *
+from BOOK;
+rollback;
