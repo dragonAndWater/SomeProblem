@@ -13,7 +13,7 @@ begin
     mydemo07('java', 27.50);
 end;
 
---存储过程       查询
+--数据库开发       查询
 create or replace procedure myDemo08(name in varchar, price out number)
 as
 begin
