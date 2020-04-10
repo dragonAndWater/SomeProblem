@@ -1,0 +1,55 @@
+-- 获取报文编码
+create or replace procedure get_msg_code(send_bank_code in varchar, rcv_bank_code in varchar, msg_code IN out varchar)
+as
+    v_msg_code varchar(20);
+
+begin
+    v_msg_code := substr(msg_code, 0, 14) || '2';
+    DBMS_OUTPUT.PUT_LINE('msg_code = ' || msg_code);
+    DBMS_OUTPUT.PUT_LINE('v_msg_code = ' || v_msg_code);
+
+    begin
+        select msg_code
+        into v_msg_code
+        from pt_busi_manage
+        where msg_code = v_msg_code
+          and format = 'BEPS'
+          and settle_bank = send_bank_code;
+    exception
+        WHEN OTHERS
+            then
+                DBMS_OUTPUT.PUT_LINE('发送行' || send_bank_code || '没有注册');
+                return;
+    end;
+
+    begin
+        select msg_code
+        into v_msg_code
+        from pt_busi_manage
+        where msg_code = v_msg_code
+          and format = 'BEPS'
+          and settle_bank = rcv_bank_code;
+    exception
+        WHEN OTHERS
+            then
+                DBMS_OUTPUT.PUT_LINE('接收行' || rcv_bank_code || '没有注册');
+                return;
+    end;
+    msg_code := v_msg_code;
+end;
+
+
+create or replace procedure testcursor999
+    is
+    cursor v_book is select *
+                     from BOOK;
+begin
+    for vb in v_book
+        loop
+            if vb.BOOKNAME = 'PHP' then
+                continue ;
+            end if;
+            DBMS_OUTPUT.PUT_LINE('bookname = ' || vb.BOOKNAME);
+        end loop;
+end;
+
