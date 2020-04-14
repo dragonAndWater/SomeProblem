@@ -1,0 +1,16 @@
+--新增字段  新增列book_col
+alter table BOOK add(book_col varchar(20));
+
+--增加注释
+comment on table LONG_TAO.BOOK is '书籍表';
+comment on column LONG_TAO.book.book_col is '测试新增字段';
+
+--删除字段  删除book_col字段
+alter table book drop column book_col;
+
+--在所有存储过程中查找  字符串
+
+select * from user_source where text like '%123%';
+
+
+select * from book;

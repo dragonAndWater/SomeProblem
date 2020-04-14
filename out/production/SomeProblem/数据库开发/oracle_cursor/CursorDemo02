@@ -1,0 +1,61 @@
+-----动态游标练习
+declare
+    type book_ref_cur is ref cursor;        -- 定义一个动态游标类型
+    b_cur     book_ref_cur;                 -- 申明一个动态游标的变量
+    book_info book%rowtype;                 --申明一个book表行数据类型的变量
+begin
+    open b_cur for select * from book;      --给动态游标赋值
+    loop
+        fetch b_cur into book_info;
+        EXIT WHEN b_cur%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('bookname = ' || book_info.BOOKNAME || ',bookPrice = ' || book_info.BOOKPRICE);
+    end loop;
+    close b_cur;
+end;
+
+SELECT *
+from book;
+
+
+
+--静态游标遍历
+create or replace procedure cursorDemo01
+as
+    cursor book_cur is select *
+                       from BOOK;
+begin
+    for b in book_cur
+        loop
+            DBMS_OUTPUT.PUT_LINE('bookname = ' || b.BOOKNAME || ',bookPrice = ' || b.BOOKPRICE);
+        end loop;
+
+end;
+
+--动态游标遍历
+create or replace procedure cursorDemo02
+as
+    type ref_cur is ref cursor;             --定义一个动态游标类型
+    cur       ref_cur;                      --申明一个动态游标的变量
+    book_info book%rowtype;                 --申明一个book表行数据类型的变量
+begin
+    open cur for select * from book;        --初始化cur这个动态游标
+    loop
+        fetch cur into book_info;           --将cur游标当前位置数据放入book_info中
+        exit when cur%NOTFOUND;             --当cur游标的值取完了，就退出
+        DBMS_OUTPUT.PUT_LINE('bookname = ' || book_info.BOOKNAME || ',bookPrice = ' || book_info.BOOKPRICE);
+    end loop;
+
+    if cur%isopen then                                      --判断动态游标取完只后是否自动关闭
+        DBMS_OUTPUT.PUT_LINE('cur游标状态：开启中');
+        close cur;                                          --动态游标为显式打开，必须手动关闭
+        DBMS_OUTPUT.PUT_LINE('现在已经关闭了');
+    else
+        DBMS_OUTPUT.PUT_LINE('cur游标状态：关闭');
+    end if;
+end;
+
+
+select *
+from BOOK;
+
+

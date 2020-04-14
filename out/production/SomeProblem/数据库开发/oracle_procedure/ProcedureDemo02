@@ -1,0 +1,72 @@
+--存储过程的增删改查
+create or replace procedure myDemo07(bookName in varchar, bookPrice in number)
+as
+begin
+    insert into BOOK(BOOKNAME, BOOKPRICE)--增
+    values (bookName, bookPrice);
+    -- delete from students where id=ids;--删
+--update students set userage=100 where id=ids;--改
+    commit;
+end;
+--调用
+begin
+    mydemo07('java', 27.50);
+end;
+
+--数据库开发       查询
+create or replace procedure myDemo08(name in varchar, price out number)
+as
+begin
+    select BOOKPRICE into price from book where BOOKNAME = name; --查
+    commit;
+end;
+
+--调用
+declare
+    bookName  varchar;
+    bookPrice NUMBER;
+begin
+    bookName := 'java';
+    myDemo08(name => bookName, name => bookPrice);
+    dbms_output.put_line('bookPrice=' || bookPrice);
+end;
+
+
+
+--删除某条记录,有游标
+create or replace procedure myDemo09(bookName in varchar)
+as
+    cursor get_name
+        is select BOOKNAME
+           from BOOK;
+begin
+    for rcv_name in get_name
+        loop
+            if rcv_name.BOOKNAME = bookName then
+                delete from BOOK where BOOKNAME = rcv_name.BOOKNAME;
+                commit;
+            else
+                DBMS_OUTPUT.PUT_LINE('bookName = ' || rcv_name.BOOKNAME);
+            end if;
+        end loop;
+end ;
+
+
+
+--更新某条数据    修改
+create or replace procedure myDemo10(bookName in varchar, bookPrice in number)
+as
+begin
+    update BOOK set BOOKPRICE = myDemo10.bookPrice where BOOKNAME = myDemo10.bookName;
+    commit;
+end;
+
+--删除某条记录
+create or replace procedure myDemo11(book_name in varchar)
+as
+begin
+    delete from BOOK where BOOKNAME = book_name;
+    commit;
+end;
+call MYDEMO11('C++');
+
