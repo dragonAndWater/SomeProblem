@@ -14,3 +14,7 @@ select * from user_source where text like '%123%';
 
 
 select * from book;
+
+
+--强行删除type
+drop type type_test force;
