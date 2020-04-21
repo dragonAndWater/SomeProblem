@@ -1,8 +1,10 @@
 public class JsonModelTest {
 
     /**
-     * a : Hello
-     * b : World
+     * 将JSON复制，使用快捷键alt+s
+     * 将JSON粘贴到弹出框内
+     *
+     *
      */
 
     private String a;
