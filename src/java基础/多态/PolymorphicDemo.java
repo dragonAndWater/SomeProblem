@@ -5,5 +5,8 @@ public class PolymorphicDemo {
 
         Person person = new Boy();
         person.speak();
+
+        Boy b = new Boy();
+        b.speak();
     }
 }
