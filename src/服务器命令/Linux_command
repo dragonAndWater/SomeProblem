@@ -24,7 +24,11 @@ netstat -nlp|grep :5005
 --即可杀掉对应的进程
 kill -9 进程号
 
+--执行.sh文件
+./xxx.sh
 
+--文件加权限
+chmod 775
 
 
 
