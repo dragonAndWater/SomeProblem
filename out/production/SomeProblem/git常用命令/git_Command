@@ -1,0 +1,30 @@
+
+1.克隆项目
+ git clone ssh://xxxxxxx
+
+2.查看分支
+ git branch -av
+
+3.切换分支
+ git checkout dev_20200513
+
+4.刷新分支
+ git pull
+
+5.将dev分支的提交merge到release分支上
+ git checkout release             --切换到release分支上
+ git merge --no-ff dev_20200513   --把dev_20200513上的提交merge到release分支
+
+6.推送到远程的gerrit上的git分支
+ git push HEAD:res/for/dev_20200513
+
+
+
+
+
+
+
+
+
+
+
