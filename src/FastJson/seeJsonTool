@@ -1,22 +1,22 @@
 {
-  "body": {
-    "job_name": "程序员",
-    "name": "long_tao",
-    "phone_no": "15199999999",
-    "toy_list": [
+  "BODY": {
+    "JOB_NAME": "程序员",
+    "NAME": "long_tao",
+    "PHONE_NO": "15199999999",
+    "TOY_LIST": [
       {
-        "toy_name": "小汽车",
-        "toy_price": "15.00"
+        "TOY_NAME": "小汽车",
+        "TOY_PRICE": "15.00"
       },
       {
-        "toy_name": "变形金刚",
-        "toy_price": "35.50"
+        "TOY_NAME": "变形金刚",
+        "TOY_PRICE": "35.50"
       }
     ]
   },
-  "head": {
-    "ret_code": "000000",
-    "ret_msg": "交易成功",
-    "status": "success"
+  "HEAD": {
+    "RET_CODE": "000000",
+    "RET_MSG": "交易成功",
+    "STATUS": "success"
   }
 }

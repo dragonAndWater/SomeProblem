@@ -47,7 +47,7 @@ public class Map2Model {
                 temp += 1;
             }
         }
-        return sb.toString().toLowerCase();
+        return sb.toString().toUpperCase();
     }
 
 }

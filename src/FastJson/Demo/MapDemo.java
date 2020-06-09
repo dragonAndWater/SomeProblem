@@ -28,7 +28,8 @@ public class MapDemo {
 
         //bean转为蛇形json
         //实际开发中获取SerializeConfig的单例
-        SerializeConfig config = SerializeConfig.getGlobalInstance();
+//        SerializeConfig config = SerializeConfig.getGlobalInstance();
+        SerializeConfig config = new SerializeConfig();
         config.propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
         String SXjson = JSON.toJSONString(request, config);
         System.out.println("蛇形json : " + SXjson);
@@ -41,7 +42,7 @@ public class MapDemo {
         XwRequest xwRequest = JSON.toJavaObject(JSON.parseObject(getStr()), XwRequest.class);
 //        UserInfo o = (UserInfo) xwRequest.getBody();
 //        System.out.println("o :"+o);
-        UserInfo u = (UserInfo) JSON.toJavaObject(JSON.parseObject(xwRequest.getBody().toString()), UserInfo.class);
+        UserInfo u =  JSON.toJavaObject(JSON.parseObject(xwRequest.getBody().toString()), UserInfo.class);
         System.out.println("u :" + u.toString());
 
         String userStr = JSON.toJSONString(u);
@@ -52,7 +53,7 @@ public class MapDemo {
         System.out.println("oStr    = " + oStr);
 
         //不能实现JsonObject 转 javaBean
-        UserInfo u1 = (UserInfo) o;
+        UserInfo u1 = (UserInfo) xwRequest.getBody();
 
     }
 
@@ -89,7 +90,29 @@ public class MapDemo {
 
 
     public static String getStr() {
-        return "{\"body\":{\"job_name\":\"程序员\",\"name\":\"long_tao\",\"phone_no\":\"15199999999\",\"toy_list\":[{\"toy_name\":\"小汽车\",\"toy_price\":\"15.00\"},{\"toy_name\":\"变形金刚\",\"toy_price\":\"35.50\"}]},\"head\":{\"ret_code\":\"000000\",\"ret_msg\":\"交易成功\",\"status\":\"success\"}}";
+        return "{\n" +
+                "  \"BODY\": {\n" +
+                "    \"JOB_NAME\": \"程序员\",\n" +
+                "    \"NAME\": \"long_tao\",\n" +
+                "    \"PHONE_NO\": \"15199999999\",\n" +
+                "    \"TOY_LIST\": [\n" +
+                "      {\n" +
+                "        \"TOY_NAME\": \"小汽车\",\n" +
+                "        \"TOY_PRICE\": \"15.00\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"TOY_NAME\": \"变形金刚\",\n" +
+                "        \"TOY_PRICE\": \"35.50\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  \"HEAD\": {\n" +
+                "    \"RET_CODE\": \"000000\",\n" +
+                "    \"RET_MSG\": \"交易成功\",\n" +
+                "    \"STATUS\": \"success\"\n" +
+                "  }\n" +
+                "}\n";
+
     }
 
 }
