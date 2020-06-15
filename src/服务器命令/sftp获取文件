@@ -1,0 +1,40 @@
+#通过sftp获取目标服务器上的文件
+
+#！bin/sh
+
+datestr=` date -d '1 day ago' +%Y%m%d `
+edwuser=bdp_cbs
+edwip=10.80.2.11
+edwdir=/data/user/bdp_cbs/output/${datestr}
+locdir=/share/ibs/ibps_maps/${datestr}
+
+mkdir -p ${locdir}
+
+cd ${locdir}
+
+##若文件存在则删除，重新下载
+if ls -l moblie_num_pay_sign_rels_${datestr}*|grep ${datestr}
+then
+    rm -rf mobile_num_pay_sign_rels_${datestr}
+fi
+
+
+sftp ${edwuser}@${edwip}<< EOP
+
+bin
+prompt
+cd ${edwdir}
+
+mget mobile_num_pay_sign_rels_${datestr}*
+
+bye
+EOF
+
+##检查ok文件，没有则表示数据文件未完全准备好，删除下载内容
+if ls -l mobile_num_pay_sign_rels_${datestr}.dat.ok | grep ${datestr}
+then
+    echo "文件下载成功"
+else
+    rm -f mobile_num_pay_sign_rels_${datestr}*
+fi
+
