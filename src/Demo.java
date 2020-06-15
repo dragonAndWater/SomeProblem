@@ -1,5 +1,12 @@
+import java.math.BigDecimal;
+
 public class Demo {
+
+    private BigDecimal number;
+
+
     public static void main(String[] args) {
+
         String str = "1";
 //        int numLetters = switch (str) {
 //            case "1" -> 6;

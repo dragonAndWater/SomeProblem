@@ -1,0 +1,22 @@
+{
+  "BODY": {
+    "JOB_NAME": "程序员",
+    "NAME": "long_tao",
+    "PHONE_NO": "15199999999",
+    "TOY_LIST": [
+      {
+        "TOY_NAME": "小汽车",
+        "TOY_PRICE": "15.00"
+      },
+      {
+        "TOY_NAME": "变形金刚",
+        "TOY_PRICE": "35.50"
+      }
+    ]
+  },
+  "HEAD": {
+    "RET_CODE": "000000",
+    "RET_MSG": "交易成功",
+    "STATUS": "success"
+  }
+}
